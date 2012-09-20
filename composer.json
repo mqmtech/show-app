@@ -6,7 +6,7 @@
     },
     "require": {
         "php": ">=5.3.3",
-        "symfony/symfony": "2.2.*",
+        "symfony/symfony": "2.1.*",
         "doctrine/orm": ">=2.2.3,<2.4-dev",
         "doctrine/doctrine-bundle": "1.0.*",
         "twig/extensions": "1.0.*",
@@ -17,7 +17,15 @@
         "sensio/framework-extra-bundle": "2.1.*",
         "sensio/generator-bundle": "2.1.*",
         "jms/security-extra-bundle": "1.2.*",
-        "jms/di-extra-bundle": "1.1.*"
+        "jms/di-extra-bundle": "1.1.*",
+        "friendsofsymfony/rest-bundle": "master",
+        "friendsofsymfony/user-bundle": "master",
+        "sonata-project/cache-bundle": "master",
+        "sonata-project/block-bundle": "master",
+        "sonata-project/jquery-bundle": "master",
+        "knplabs/knp-menu-bundle": "*",
+        "sonata-project/admin-bundle": "master",
+        "sonata-project/doctrine-orm-admin-bundle": "master"
     },
     "scripts": {
         "post-install-cmd": [

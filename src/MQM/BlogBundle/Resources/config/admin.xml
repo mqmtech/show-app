@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="mqm_blog.translation_domain">MQMBlogBundle</parameter>
+        <parameter key="mqm_blog.controller">SonataAdminBundle:CRUD</parameter>
+
+        <parameter key="mqm_blog.blog.entity">MQM\BlogBundle\Entity\Blog</parameter>
+        <parameter key="mqm_blog.topic.entity">MQM\BlogBundle\Entity\Topic</parameter>
+        <parameter key="mqm_blog.tag.entity">MQM\BlogBundle\Entity\Tag</parameter>
+        <parameter key="mqm_blog.message.entity">MQM\BlogBundle\Entity\Message</parameter>
+
+    </parameters>
+
+    <services>
+        <service id="sonata.admin.blog" class="MQM\BlogBundle\Admin\BlogAdmin" public="true">
+            <tag name="sonata.admin" manager_type="orm" group="mqm_blog" label="blogs"/>
+            <argument/>
+            <argument>%mqm_blog.blog.entity%</argument>
+            <argument>%mqm_blog.controller%</argument>
+            <call method="setTranslationDomain">
+                <argument>%mqm_blog.translation_domain%</argument>
+            </call>
+        </service>
+
+        <service id="sonata.admin.topic" class="MQM\BlogBundle\Admin\TopicAdmin" public="true">
+            <tag name="sonata.admin" manager_type="orm" group="mqm_blog" label="topics"/>
+            <argument/>
+            <argument>%mqm_blog.topic.entity%</argument>
+            <argument>%mqm_blog.controller%</argument>
+            <call method="setTranslationDomain">
+                <argument>%mqm_blog.translation_domain%</argument>
+            </call>
+        </service>
+
+        <service id="sonata.admin.tag" class="MQM\BlogBundle\Admin\TagAdmin" public="true">
+            <tag name="sonata.admin" manager_type="orm" group="mqm_blog" label="tags"/>
+            <argument/>
+            <argument>%mqm_blog.tag.entity%</argument>
+            <argument>%mqm_blog.controller%</argument>
+            <call method="setTranslationDomain">
+                <argument>%mqm_blog.translation_domain%</argument>
+            </call>
+        </service>
+
+        <service id="sonata.admin.tag" class="MQM\BlogBundle\Admin\MessageAdmin" public="true">
+            <tag name="sonata.admin" manager_type="orm" group="mqm_blog" label="messages"/>
+            <argument/>
+            <argument>%mqm_blog.message.entity%</argument>
+            <argument>%mqm_blog.controller%</argument>
+            <call method="setTranslationDomain">
+                <argument>%mqm_blog.translation_domain%</argument>
+            </call>
+        </service>
+    </services>
+
+</container>

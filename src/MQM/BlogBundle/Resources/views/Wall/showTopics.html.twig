@@ -1,0 +1,15 @@
+{% extends 'AcmeDemoBundle::layout.html.twig' %}
+
+{% block title %}Symfony - Welcome{% endblock %}
+
+{% block content_header '' %}
+
+{% block content %}
+    {% set version = constant('Symfony\\Component\\HttpKernel\\Kernel::MAJOR_VERSION') ~ '.' ~ constant('Symfony\\Component\\HttpKernel\\Kernel::MINOR_VERSION')%}
+    <div class="portal_index">
+        Blog Index site
+        {% for topic in topics %}
+        <h1>{{ topic.title }}</h1>
+        {% endfor %}
+    </div>
+{% endblock %}

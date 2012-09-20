@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                  http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="MQM\BlogBundle\Entity\Topic" table="mqm_topic">
+        <id name="id" column="id" type="integer">
+            <generator strategy="AUTO"/>
+        </id>
+        <field name="title" column="title" type="string" length="255" unique="true"/>
+        <field name="slug" column="slug" type="string" length="255"/>
+        <field name="createdAt" column="created_at" type="datetime"/>
+        <field name="updatedAt" column="updated_at" type="datetime"/>
+        <many-to-many field="tags" target-entity="MQM\BlogBundle\Entity\Tag">
+            <cascade>
+                <cascade-persist/>
+            </cascade>
+            <join-table name="mqm_topics_tags">
+                <join-columns>
+                    <join-column name="topic_id" referenced-column-name="id" nullable="false" unique="false" />
+                </join-columns>
+                <inverse-join-columns>
+                    <join-column name="tag_id" referenced-column-name="id" column-definition="INT NULL" />
+                </inverse-join-columns>
+            </join-table>
+        </many-to-many>
+        <many-to-one field="blog" target-entity="MQM\BlogBundle\Entity\Blog"/>
+        <one-to-many field="messages" target-entity="MQM\BlogBundle\Entity\Message" mapped-by="topic" nullable="true"/>
+        <field name="content" column="content" type="text"/>
+        <many-to-one field="user" target-entity="MQM\UserBundle\Entity\User"/>
+
+        <lifecycle-callbacks>
+            <lifecycle-callback type="prePersist" method="prePersist"/>
+            <lifecycle-callback type="preUpdate" method="preUpdate"/>
+        </lifecycle-callbacks>
+    </entity>
+</doctrine-mapping>

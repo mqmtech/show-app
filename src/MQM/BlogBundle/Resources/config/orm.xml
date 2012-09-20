@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="mqm_blog.db_manager" class="MQM\BlogBundle\Entity\BlogDBManager" public="true">
+            <argument type="service" id="mqm_blog.factory" />
+            <argument type="service" id="mqm_blog.entity_manager" />
+        </service>
+
+        <service id="mqm_blog.entity_manager" factory-service="doctrine" factory-method="getManager" class="Doctrine\ORM\EntityManager" public="false">
+            <!--<argument>%fos_user.model_manager_name%</argument>-->
+        </service>
+
+        <service id="mqm_blog.factory" class="MQM\BlogBundle\Model\BlogFactory" public="true">
+            <argument>MQM\BlogBundle\Entity\Blog</argument>
+            <argument>MQM\BlogBundle\Entity\Topic</argument>
+            <argument>MQM\BlogBundle\Entity\Message</argument>
+        </service>
+    </services>
+
+</container>

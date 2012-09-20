@@ -19,6 +19,17 @@ class AppKernel extends Kernel
             new JMS\AopBundle\JMSAopBundle(),
             new JMS\DiExtraBundle\JMSDiExtraBundle($this),
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
+            new \FOS\UserBundle\FOSUserBundle(),
+            //new \FOS\RestBundle\FOSRestBundle(),
+            new \MQM\UserBundle\MQMUserBundle(),
+            new \MQM\PersonalSiteBundle\MQMPersonalSiteBundle(),
+            new \MQM\BlogBundle\MQMBlogBundle(),
+            new \Sonata\CacheBundle\SonataCacheBundle(),
+            new \Sonata\BlockBundle\SonataBlockBundle(),
+            new \Sonata\jQueryBundle\SonatajQueryBundle(),
+            new \Knp\Bundle\MenuBundle\KnpMenuBundle(),
+            new \Sonata\AdminBundle\SonataAdminBundle(),
+            new \Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
