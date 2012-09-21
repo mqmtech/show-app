@@ -20,7 +20,6 @@ class AppKernel extends Kernel
             new JMS\DiExtraBundle\JMSDiExtraBundle($this),
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
             new \FOS\UserBundle\FOSUserBundle(),
-            //new \FOS\RestBundle\FOSRestBundle(),
             new \MQM\UserBundle\MQMUserBundle(),
             new \MQM\PersonalSiteBundle\MQMPersonalSiteBundle(),
             new \MQM\BlogBundle\MQMBlogBundle(),
@@ -30,6 +29,10 @@ class AppKernel extends Kernel
             new \Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new \Sonata\AdminBundle\SonataAdminBundle(),
             new \Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
+            new \LK\TwigstringBundle\LKTwigstringBundle(),
+            new \MQM\PaginationBundle\MQMPaginationBundle(),
+            new \JMS\SerializerBundle\JMSSerializerBundle($this),
+            new \FOS\RestBundle\FOSRestBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

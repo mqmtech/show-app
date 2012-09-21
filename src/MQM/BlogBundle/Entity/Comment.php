@@ -2,11 +2,11 @@
 
 namespace MQM\BlogBundle\Entity;
 
-use MQM\BlogBundle\Model\Message as BaseMessage;
+use MQM\BlogBundle\Model\Comment as BaseComment;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
-class Message extends BaseMessage
+class Comment extends BaseComment
 {
     protected $id;
 

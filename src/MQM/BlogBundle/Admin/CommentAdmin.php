@@ -9,7 +9,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Validator\ErrorElement;
 use Sonata\AdminBundle\Show\ShowMapper;
 
-class MessageAdmin extends Admin
+class CommentAdmin extends Admin
 {
     protected function configureListFields(ListMapper $listMapper)
     {

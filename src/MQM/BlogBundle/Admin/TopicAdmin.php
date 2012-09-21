@@ -8,6 +8,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Validator\ErrorElement;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Knp\Menu\ItemInterface as MenuItemInterface;
 
 class TopicAdmin extends Admin
 {
@@ -32,7 +33,28 @@ class TopicAdmin extends Admin
                 'expanded' => true,
                 'multiple' => true, // For ManyToMany fields
             ))
+            ->add('comments', 'sonata_type_model', array(
+                'by_reference' => false,
+                'expanded' => true,
+                'multiple' => true,
+        ))
         ;
+    }
+
+    protected function configureSideMenu(MenuItemInterface $menu, $action, Admin $childAdmin = null)
+    {
+        if (!$childAdmin && !in_array($action, array('edit'))) {
+            return;
+        }
+
+        $admin = $this->isChild() ? $this->getParent() : $this;
+
+        $id = $admin->getRequest()->get('id');
+
+        $menu->addChild(
+            $this->trans('side_menu_topic_edit', array(), 'MQMBlogBundle'),
+            array('uri' => $admin->generateUrl('edit', array('id' => $id)))
+        );
     }
 
     public function validate(ErrorElement $errorElement, $object)

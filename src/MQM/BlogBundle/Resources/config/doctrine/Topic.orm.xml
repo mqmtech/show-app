@@ -26,7 +26,7 @@
             </join-table>
         </many-to-many>
         <many-to-one field="blog" target-entity="MQM\BlogBundle\Entity\Blog"/>
-        <one-to-many field="messages" target-entity="MQM\BlogBundle\Entity\Message" mapped-by="topic" nullable="true"/>
+        <one-to-many field="comments" target-entity="MQM\BlogBundle\Entity\Comment" mapped-by="topic" nullable="true"/>
         <field name="content" column="content" type="text"/>
         <many-to-one field="user" target-entity="MQM\UserBundle\Entity\User"/>
 

@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use MQM\BlogBundle\Model\Helper;
 
-class Message
+class Comment
 {
     protected $slug;
     protected $title;

@@ -10,6 +10,7 @@
         Blog Index site
         {% for topic in topics %}
         <h1>{{ topic.title }}</h1>
+        {{ topic.content | mqm_blog_render_string }}
         {% endfor %}
     </div>
 {% endblock %}

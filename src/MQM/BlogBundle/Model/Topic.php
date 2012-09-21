@@ -11,7 +11,7 @@ class Topic
     protected $slug;
     protected $title;
     protected $content;
-    protected $messages;
+    protected $comments;
     protected $tags;
     protected $blog;
     protected $user;
@@ -40,14 +40,14 @@ class Topic
         return $this->blog;
     }
 
-    public function setMessages($messages)
+    public function setComments($comments)
     {
-        $this->messages = $messages;
+        $this->comments = $comments;
     }
 
-    public function getMessages()
+    public function getComments()
     {
-        return $this->messages;
+        return $this->comments;
     }
 
     public function setTags($tags)
