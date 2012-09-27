@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="mqm_chat.translation_domain">SonataAdminBundle</parameter>
+        <parameter key="mqm_chat.controller">SonataAdminBundle:CRUD</parameter>
+
+        <parameter key="mqm_chat.category.entity">MQM\VideochatBundle\Entity\Category</parameter>
+        <parameter key="mqm_chat.room.entity">MQM\VideochatBundle\Entity\Room</parameter>
+        <parameter key="mqm_chat.room_session.entity">MQM\VideochatBundle\Entity\RoomSession</parameter>
+        <parameter key="mqm_chat.viewer_session.entity">MQM\VideochatBundle\Entity\ViewerSession</parameter>
+        <parameter key="mqm_chat.tag.entity">MQM\VideochatBundle\Entity\Tag</parameter>
+        <parameter key="mqm_chat.comment.entity">MQM\VideochatBundle\Entity\Comment</parameter>
+
+    </parameters>
+
+    <services>
+        <service id="mqm_chat.admin.category" class="MQM\VideochatBundle\Admin\CategoryAdmin" public="true">
+            <tag name="sonata.admin" manager_type="orm" group="mqm_chat" label="categories"/>
+            <argument/>
+            <argument>%mqm_chat.category.entity%</argument>
+            <argument>%mqm_chat.controller%</argument>
+            <call method="setTranslationDomain">
+                <argument>%mqm_chat.translation_domain%</argument>
+            </call>
+        </service>
+
+        <service id="mqm_chat.admin.room" class="MQM\VideochatBundle\Admin\RoomAdmin" public="true">
+            <tag name="sonata.admin" manager_type="orm" group="mqm_chat" label="rooms"/>
+            <argument/>
+            <argument>%mqm_chat.room.entity%</argument>
+            <argument>%mqm_chat.controller%</argument>
+            <call method="setTranslationDomain">
+                <argument>%mqm_chat.translation_domain%</argument>
+            </call>
+        </service>
+
+        <service id="mqm_chat.admin.room_session" class="MQM\VideochatBundle\Admin\RoomSessionAdmin" public="true">
+            <tag name="sonata.admin" manager_type="orm" group="mqm_chat" label="room sessions"/>
+            <argument/>
+            <argument>%mqm_chat.room_session.entity%</argument>
+            <argument>%mqm_chat.controller%</argument>
+            <call method="setTranslationDomain">
+                <argument>%mqm_chat.translation_domain%</argument>
+            </call>
+        </service>
+
+        <service id="mqm_chat.admin.viewer_session" class="MQM\VideochatBundle\Admin\ViewerSessionAdmin" public="true">
+            <tag name="sonata.admin" manager_type="orm" group="mqm_chat" label="viewer sessions"/>
+            <argument/>
+            <argument>%mqm_chat.viewer_session.entity%</argument>
+            <argument>%mqm_chat.controller%</argument>
+            <call method="setTranslationDomain">
+                <argument>%mqm_chat.translation_domain%</argument>
+            </call>
+        </service>
+
+        <service id="mqm_chat.admin.tag" class="MQM\VideochatBundle\Admin\TagAdmin" public="true">
+            <tag name="sonata.admin" manager_type="orm" group="mqm_chat" label="tags"/>
+            <argument/>
+            <argument>%mqm_chat.tag.entity%</argument>
+            <argument>%mqm_chat.controller%</argument>
+            <call method="setTranslationDomain">
+                <argument>%mqm_chat.translation_domain%</argument>
+            </call>
+        </service>
+
+        <service id="mqm_chat.admin.comment" class="MQM\VideochatBundle\Admin\CommentAdmin" public="true">
+            <tag name="sonata.admin" manager_type="orm" group="mqm_chat" label="comments"/>
+            <argument/>
+            <argument>%mqm_chat.comment.entity%</argument>
+            <argument>%mqm_chat.controller%</argument>
+            <call method="setTranslationDomain">
+                <argument>%mqm_chat.translation_domain%</argument>
+            </call>
+        </service>
+    </services>
+
+</container>

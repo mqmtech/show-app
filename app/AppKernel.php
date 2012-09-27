@@ -33,6 +33,7 @@ class AppKernel extends Kernel
             new \MQM\PaginationBundle\MQMPaginationBundle(),
             new \JMS\SerializerBundle\JMSSerializerBundle($this),
             new \FOS\RestBundle\FOSRestBundle(),
+            new \MQM\VideochatBundle\MQMVideochatBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

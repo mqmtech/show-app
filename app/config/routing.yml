@@ -27,7 +27,7 @@ mqm_personalsite_portal:
     prefix: /portal
 
 mqm_blog_wall:
-    resource: "@MQMBlogBundle/Resources/config/routing/wall.xml"
+    resource: "@MQMBlogBundle/Resources/config/routing/blog.xml"
     prefix: /blog
 
 sonata_page_cache:
@@ -42,3 +42,7 @@ _sonata_admin:
     resource: .
     type: sonata_admin
     prefix: /admin
+
+mqm_videochat:
+    resource: "@MQMVideochatBundle/Resources/config/routing/videochat.xml"
+    prefix: /videochat
