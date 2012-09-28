@@ -1,0 +1,96 @@
+{% extends 'AcmeDemoBundle::layout.html.twig' %}
+
+{% block title %}Symfony - Welcome{% endblock %}
+
+{% block content_header '' %}
+
+{% block content %}
+    <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+    <script src="{{asset('bundles/mqmvideochat/js/webcam_plugin/jquery.webcam.js')}}"></script>
+
+    <script type="text/javascript">
+        jQuery(window).load(function(){
+
+            jQuery("#capture_button").click(function(event){
+                capture();
+            });
+
+            jQuery("#publish_button").click(function(event){
+                publish();
+            });
+
+            jQuery("#subscribe_button").click(function(event){
+                subscribe();
+            });
+        });
+
+        function capture()
+        {
+            $("#camera").webcam({
+                width: 320,
+                height: 240,
+                mode: "stream", //callback, stream
+                swffile: "{{asset('bundles/mqmvideochat/js/webcam_plugin/jscam_canvas_only.swf')}}",
+                onTick: onTick,
+                onSave: onSave,
+                onCapture: onCapture,
+                debug: debug,
+                onLoad: onLoad
+            });
+        }
+
+        function onLoad()
+        {
+            var cams = webcam.getCameraList();
+            for(var i in cams) {
+                jQuery("#cams").append("<li>" + cams[i] + "</li>");
+            }
+
+            jQuery("#notifications").append("Ready to publish");
+        }
+
+        function onTick(remain)
+        {
+            jQuery("#ticks").append("remain " + remain + "seconds");
+        }
+
+        function onCapture()
+        {
+            jQuery("#ticks").append("c.");
+        }
+
+        function onSave()
+        {
+            //jQuery("#notifications").append("Saved. ");
+        }
+
+        function debug(type, event){
+            jQuery("#notifications").append("[" + event + "] ");
+        }
+
+        function publish()
+        {
+            webcam.capture(3)
+        }
+
+        function subscribe()
+        {
+        }
+
+    </script>
+
+    <div id="camera"></div>
+    <div id="remote_camera"></div>
+    <div id="capture"></div>
+    <div id="cams"></div>
+    <div id="ticks"></div>
+    <div id="notifications"></div>
+
+    <button id="capture_button" value="capture">Capture</button>
+    <button id="publish_button" value="publish">Publish</button>
+    <button id="subscribe_button" value="subscribe">Subscribe</button>
+
+
+{% endblock %}
+
+

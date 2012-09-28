@@ -1,0 +1,45 @@
+{% extends 'AcmeDemoBundle::layout.html.twig' %}
+
+{% block title %}Symfony - Welcome{% endblock %}
+
+{% block content_header '' %}
+
+{% block content %}
+    <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="http://static.opentok.com/v0.91/js/TB.min.js"></script>
+
+    {% set version = constant('Symfony\\Component\\HttpKernel\\Kernel::MAJOR_VERSION') ~ '.' ~ constant('Symfony\\Component\\HttpKernel\\Kernel::MINOR_VERSION')%}
+    <div class="portal_index">
+        Category Index site
+        {% for room in rooms %}
+        <h1>{{ room.title }}</h1>
+        {{ room.description | mqm_chat_render_string }}
+        {% endfor %}
+    </div>
+
+    <div id="myPublisherDiv"></div>
+
+    <script type="text/javascript">
+        //$(document).load(function(){
+            var apiKey = '20530482';
+            var sessionId = '1_MX4yMDUzMDQ4Mn5-V2VkIFNlcCAyNiAxODo1MDo1OCBQRFQgMjAxMn4wLjAxMzM0MjV-';
+            var token = 'T1==cGFydG5lcl9pZD0yMDUzMDQ4MiZzZGtfdmVyc2lvbj10YnB5LUBzZGtfdmVyc2lvbkAuQG9wZW50b2suc2RrLnB5dGhvbi5tb2RfdGltZUAmc2lnPTNkNmE0ZDE3M2VjMTBhZDQzODkwNGNiYTM1YzM3MzQwNmU4NmU3YzA6bm9uY2U9OTg4NSZjcmVhdGVfdGltZT0xMzQ4NzEwNjU4JnJvbGU9cHVibGlzaGVyJnNlc3Npb25faWQ9MV9NWDR5TURVek1EUTRNbjUtVjJWa0lGTmxjQ0F5TmlBeE9EbzFNRG8xT0NCUVJGUWdNakF4TW40d0xqQXhNek0wTWpWLQ==';
+
+            TB.setLogLevel(TB.DEBUG); // Set this for helpful debugging messages in console
+
+            var session = TB.initSession(sessionId);
+            session.addEventListener('sessionConnected', sessionConnectedHandler);
+            session.connect(apiKey, token);
+
+            var publisher;
+
+            function sessionConnectedHandler(event) {
+                // Put my webcam in a div
+                var publishProps = {height:240, width:320};
+                publisher = TB.initPublisher(apiKey, 'myPublisherDiv', publishProps);
+                // Send my stream to the session
+                session.publish(publisher);
+            }
+        //});
+    </script>
+{% endblock %}

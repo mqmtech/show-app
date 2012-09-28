@@ -1,0 +1,149 @@
+{% extends 'AcmeDemoBundle::layout.html.twig' %}
+
+{% block title %}Symfony - Welcome{% endblock %}
+
+{% block content_header '' %}
+
+{% block content %}
+    <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+    <script src="{{asset('bundles/mqmvideochat/js/webcam_plugin/jquery.webcam.js')}}"></script>
+
+    <script type="text/javascript">
+        var pos = 0, ctx = null, saveCB, image = [];
+        jQuery(window).load(function(){
+
+            ////////////////For on Save Method///////////
+            var canvas = document.createElement("canvas");
+            canvas.setAttribute('width', 320);
+            canvas.setAttribute('height', 240);
+
+            if (canvas.toDataURL) {
+
+                ctx = canvas.getContext("2d");
+
+                image = ctx.getImageData(0, 0, 320, 240);
+
+                saveCB = function(data) {
+
+                    var col = data.split(";");
+                    var img = image;
+
+                    for(var i = 0; i < 320; i++) {
+                        var tmp = parseInt(col[i]);
+                        img.data[pos + 0] = (tmp >> 16) & 0xff;
+                        img.data[pos + 1] = (tmp >> 8) & 0xff;
+                        img.data[pos + 2] = tmp & 0xff;
+                        img.data[pos + 3] = 0xff;
+                        pos+= 4;
+                    }
+
+                    if (pos >= 4 * 320 * 240) {
+                        ctx.putImageData(img, 0, 0);
+                        $.post("{{asset('bundles/mqmvideochat/php/Publisher.php')}}", {type: "data", image: canvas.toDataURL("image/png")});
+                        pos = 0;
+                    }
+                };
+
+            } else {
+                /*
+                saveCB = function(data) {
+                    image.push(data);
+
+                    pos+= 4 * 320;
+
+                    if (pos >= 4 * 320 * 240) {
+                        $.post("{{asset('bundles/mqmvideochat/php/Publisher.php')}}", {type: "pixel", image: image.join('|')});
+                        pos = 0;
+                    }
+                };
+                */
+            }
+            ///////////////End for on save method////////
+
+            jQuery("#capture_button").click(function(event){
+                capture();
+            });
+
+            jQuery("#publish_button").click(function(event){
+                publish();
+            });
+
+            jQuery("#subscribe_button").click(function(event){
+                subscribe();
+            });
+
+            jQuery("#save_button").click(function(event){
+                save();
+            });
+        });
+
+        function capture()
+        {
+            $("#camera").webcam({
+                width: 320,
+                height: 240,
+                mode: "stream", //callback, stream
+                swffile: "{{asset('bundles/mqmvideochat/js/webcam_plugin/jscam_canvas_only.swf')}}",
+                onTick: onTick,
+                onSave: saveCB,
+                onCapture: onCapture,
+                debug: debug,
+                onLoad: onLoad
+            });
+        }
+
+        function onLoad()
+        {
+            var cams = webcam.getCameraList();
+            for(var i in cams) {
+                jQuery("#cams").append("<li>" + cams[i] + "</li>");
+            }
+
+            jQuery("#notifications").append("Ready to publish");
+        }
+
+        function onTick(remain)
+        {
+            jQuery("#ticks").html("remain " + remain + "seconds");
+        }
+
+        function onCapture()
+        {
+            webcam.save("{{asset('bundles/mqmvideochat/php/Publisher.php')}}");
+        }
+
+        function debug(type, event){
+            jQuery("#notifications").append("[" + event + "] ");
+        }
+
+        function publish()
+        {
+            webcam.capture()
+        }
+
+        function subscribe()
+        {
+        }
+
+        function save()
+        {
+            webcam.save();
+        }
+
+    </script>
+
+    <div id="camera"></div>
+    <div id="remote_camera"></div>
+    <div id="capture"></div>
+    <div id="cams"></div>
+    <div id="ticks"></div>
+    <div id="notifications"></div>
+
+    <button id="capture_button" value="capture">Capture</button>
+    <button id="publish_button" value="publish">Publish</button>
+    <button id="subscribe_button" value="subscribe">Subscribe</button>
+
+
+{% endblock %}
+
+
